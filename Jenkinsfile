@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         def user = 'ubuntu'
-        def host = '172.31.17.78'
+        def host = '172.31.90.145'
     }
 
     stages {
@@ -17,10 +17,11 @@ pipeline {
         stage('Docker image') {
             steps {
                 script {
-                    def tag = "${BUILD_NUMBER}"
+                    def tag = "nativecloudapp:${env.BUILD_NUMBER}"
+                    def dockerfile = "~/Downloads/Dockerfile"
                     sshagent(['Dockerprivkey']) {
-                        sh "scp -o StrictHostkeyChecking=no /var/lib/jenkins/workspace/'Native cloud app'/Dockerfile ${user}@${host}:~/Downloads/"
-                        sh "ssh -o StrictHostKeyChecking=no ${user}@${host} docker build -t cloudapp:${tag} -f ~/Downloads/Dockerfile ~/Downloads"
+                        sh "scp -r -o StrictHostkeyChecking=no /var/lib/jenkins/workspace/Native-cloud-app/* ${user}@${host}:~/Downloads/"
+                        sh "ssh -o StrictHostKeyChecking=no ${user}@${host} 'docker build -t ${tag} ~/Downloads'"
                     }
                 }
             }
