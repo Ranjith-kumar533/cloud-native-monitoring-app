@@ -3,9 +3,9 @@ pipeline {
     
     environment {
         def user = 'ubuntu'
-        def host = '172.31.90.145'
+        def host = '172.31.20.158'
         def tag = "nativecloudapp:${env.BUILD_NUMBER}"
-        def image = "ranjik/test:${tag}"
+        def image = "ranjik/test:nativecloudappv${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -28,12 +28,13 @@ pipeline {
         }
         stage('Pushing images') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'Dockerhubpassword', usernameVariable: 'DockerhubUsername', passwordVariable: 'DockerhubPassword')]) {
+                withCredentials([usernamePassword(credentialsId: 'Dockerhubcreds', usernameVariable: 'DockerhubUsername', passwordVariable: "DockerhubPassword")]) {
                     script {
                         sshagent(['Dockerprivkey']) {
                             sh "ssh -o StrictHostkeyChecking=no ${user}@${host} 'echo ${DockerhubPassword} | docker login -u ${DockerhubUsername} --password-stdin'"
                             sh "ssh -o StrictHostkeyChecking=no ${user}@${host} 'docker tag ${tag} ${image}'"
                             sh "ssh -o StrictHostkeyChecking=no ${user}@${host} 'docker push ${image}'"
+
                         }
                     }
                 }
