@@ -16,7 +16,7 @@ spec:
     spec:
        containers:
        - name: cloudapp
-         image: ranjik/test:nativecloudappvVersion
+         image: ranjik/test:nativecloudappv5
          ports:
          - containerPort: 5000
        imagePullSecrets:
