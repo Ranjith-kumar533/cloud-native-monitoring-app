@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: cloudapp
+  labels: 
+    app: cloudapp
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels:
+       app: cloudapp
+  template: 
+    metadata:
+       labels:
+          app: cloudapp
+    spec:
+       containers:
+       - name: cloudapp
+         image: ranjik/test:nativecloudappvVersion
+         ports:
+         - containerPort: 5000
+       imagePullSecrets:
+       - name: privdocker
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cloudapp
+  name: cloudapp-service
+spec:
+  type: NodePort
+  ports:
+  - port: 4000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: cloudapp
