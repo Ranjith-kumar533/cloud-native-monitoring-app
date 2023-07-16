@@ -16,9 +16,9 @@ spec:
     spec:
        containers:
        - name: cloudapp
-         image: ranjik/test:nativecloudappv${BUILD}
+         image: ranjik/test:nativecloudappv5
          ports:
-         - containerPort: ${BUILD}000
+         - containerPort: 5000
        imagePullSecrets:
        - name: privdocker
 ---
@@ -33,6 +33,6 @@ spec:
   ports:
   - port: 4000
     protocol: TCP
-    targetPort: ${BUILD}000
+    targetPort: 5000
   selector:
     app: cloudapp
