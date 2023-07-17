@@ -16,7 +16,7 @@ spec:
     spec:
        containers:
        - name: nativecloudappv46
-         image: ranjik/testrepository:nativecloudappv46
+         image: ranjik/testrepository:cloudappv48
          ports:
          - containerPort: 5000
        #imagePullSecrets:
