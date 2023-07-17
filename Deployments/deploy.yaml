@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: testappv57
+  name: testappv58
   labels: 
     app: cloudapp
 spec: 
@@ -15,9 +15,9 @@ spec:
           app: cloudapp
     spec:
        containers:
-       - name: testappv57
-         image: ranjik/testrepository:testappv57
+       - name: testappv58
+         image: ranjik/testrepository:testappv58
          ports:
          - containerPort: 5000
        #imagePullSecrets:
-       #- name: testappv57
+       #- name: testappv58
