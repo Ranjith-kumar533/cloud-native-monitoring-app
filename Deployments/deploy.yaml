@@ -20,7 +20,7 @@ spec:
          ports:
          - containerPort: 5000
        imagePullSecrets:
-       - name: regcred
+       - name: privdocker
 ---
 apiVersion: v1
 kind: Service
