@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: nativecloudappv45
+  name: nativecloudappv46
   labels: 
     app: cloudapp
 spec: 
@@ -15,8 +15,8 @@ spec:
           app: cloudapp
     spec:
        containers:
-       - name: nativecloudappv45
-         image: ranjik/test:nativecloudappv45
+       - name: nativecloudappv46
+         image: ranjik/testrepository:nativecloudappv46
          ports:
          - containerPort: 5000
        #imagePullSecrets:
@@ -27,7 +27,7 @@ kind: Service
 metadata:
   labels:
     app: cloudapp
-  name: nativecloudappv45
+  name: nativecloudappv46
 spec:
   type: NodePort
   ports:
